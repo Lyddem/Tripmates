@@ -6,6 +6,7 @@ import axios from 'axios';
 import Header from './Header';
 import InviteFriends from './InviteFriends';
 import YelpSearch from './YelpSearch';
+import jquery from 'jquery'
 
 
 class CreateTrip extends React.Component {
@@ -95,9 +96,15 @@ class CreateTrip extends React.Component {
               <label>Destination</label>
               <input name="tripName" type="text" onChange={e => this.setState({destination: e.target.value})} />
 
-              <label>Date Range Options</label>
+              <label>Date Range Options</label> 
+              <div id="datepicker"></div>
+              {$( "#datepicker" ).datepicker()}
+
               {this.state.dates.map((date,index) => {
-                return(<div key={index}><li className="dateItem">{date}</li></div>)})}
+                return(<div key={index}><li className="dateItem">{date}</li>
+                      
+                      </div>)
+              })}
 
               <input name="dateRange" placeholder="mm/dd/yyyy - mm/dd/yyyy"type ="text" onChange={e => this.setState({date: e.target.value})}/>
               <button id="secondary" onClick={this.onDateSubmission}>+</button>
