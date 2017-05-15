@@ -446,3 +446,17 @@ button#secondary {
   float: left;
   margin-left: 5px;
 }
+
+#dateSubmit {
+  background-color: #888888;
+  border: none;
+  font-size: 12px;
+  padding: 10px 10px;
+  float: right;
+  margin-right: 25px;
+}
+
+#dateSubmit:hover {
+  background-color: #888888;
+}
+

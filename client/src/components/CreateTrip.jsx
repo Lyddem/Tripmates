@@ -12,8 +12,8 @@ class CreateTrip extends React.Component {
     super(props);
 
     this.state = {
-      dates: [],
-      date: "",
+      // dates: [], 
+      // date: "",
       activities: [],
       activityName: "",
       activityDescription: "",
@@ -28,11 +28,9 @@ class CreateTrip extends React.Component {
     };
 
     this.onActivityClick = this.onActivityClick.bind(this);
-    this.onDateSubmission = this.onDateSubmission.bind(this);
+    // this.onDateSubmission = this.onDateSubmission.bind(this);
     this.onAddTripClick = this.onAddTripClick.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.dateCalendar = this.dateCalendar.bind(this);
-
   }
 
   toggleModal(e) {
@@ -60,12 +58,12 @@ class CreateTrip extends React.Component {
     this.setState({activities: arr})
   }
 
-  onDateSubmission (e) {
-    e.preventDefault();
-    var arr = this.state.dates;
-    arr.push(this.state.date);
-    this.setState({dates: arr});
-  }
+  // onDateSubmission (e) {
+  //   e.preventDefault();
+  //   var arr = this.state.dates;
+  //   arr.push(this.state.date);
+  //   this.setState({dates: arr});
+  // }
 
   onAddTripClick (e, friend) {
     e.preventDefault();
@@ -79,12 +77,8 @@ class CreateTrip extends React.Component {
         console.log('Error posting trip to DB', error)
         })
   }
-
-  dateCalendar(){
-    this.setState({
-      showCalendar: true
-    })
-  }
+       // <input name="dateRange" placeholder="mm/dd/yyyy - mm/dd/yyyy"type ="text" onChange={e => this.setState({date: e.target.value})}/>
+       //        <button id="secondary" onClick={this.onDateSubmission}>+</button>
 
   render() {
     return (
@@ -103,19 +97,12 @@ class CreateTrip extends React.Component {
               <label>Destination</label>
               <input name="tripName" type="text" onChange={e => this.setState({destination: e.target.value})} />
 
-              <label>Date Range Options</label> <br/>
-              <p>Date: <input type="text" id="datepicker" onClick={this.dateCalendar}></input></p><br/>
-
-              {this.state.showCalendar ? ( <div id="calendar"> <Calendar /></div> ) : null}
+              <label>Date Range Options</label> 
+              
+              <Calendar />
                          
-              {this.state.dates.map((date,index) => {
-                return(<div key={index}><li className="dateItem">{date}</li>
-                      
-                      </div>)
-              })}
+             
 
-              <input name="dateRange" placeholder="mm/dd/yyyy - mm/dd/yyyy"type ="text" onChange={e => this.setState({date: e.target.value})}/>
-              <button id="secondary" onClick={this.onDateSubmission}>+</button>
             </div>
 
             <div className="column2">
