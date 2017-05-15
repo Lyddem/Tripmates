@@ -9,7 +9,6 @@ import Profile from './Profile';
 import CreateTrip from './CreateTrip';
 import ContributeTrip from './ContributeTrip';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);

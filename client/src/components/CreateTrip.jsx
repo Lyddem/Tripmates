@@ -2,12 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
-
 import Header from './Header';
 import InviteFriends from './InviteFriends';
 import YelpSearch from './YelpSearch';
-import jquery from 'jquery'
-
+import Calendar from  './Calendar';
 
 class CreateTrip extends React.Component {
   constructor(props) {
@@ -32,6 +30,8 @@ class CreateTrip extends React.Component {
     this.onDateSubmission = this.onDateSubmission.bind(this);
     this.onAddTripClick = this.onAddTripClick.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.dateCalendar = this.dateCalendar.bind(this);
+
   }
 
   toggleModal(e) {
@@ -79,6 +79,13 @@ class CreateTrip extends React.Component {
       })
   }
 
+  dateCalendar(){
+    alert('hi');
+    $(document).ready(function(){
+    $( "#datepicker" ).datepicker();
+});
+  }
+
   render() {
     return (
       <div id="createTrip">
@@ -97,9 +104,10 @@ class CreateTrip extends React.Component {
               <input name="tripName" type="text" onChange={e => this.setState({destination: e.target.value})} />
 
               <label>Date Range Options</label> 
-              <div id="datepicker"></div>
-              {$( "#datepicker" ).datepicker()}
+              <p>Date: <input type="text" id="datepicker" onClick={this.dateCalendar}></input></p>
 
+              <Calendar />
+              
               {this.state.dates.map((date,index) => {
                 return(<div key={index}><li className="dateItem">{date}</li>
                       

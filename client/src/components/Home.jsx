@@ -6,7 +6,6 @@ import axios from 'axios';
 import Header from './Header';
 import YelpSearch from './YelpSearch';
 
-
 class Home extends React.Component {
   constructor(props) {
     super(props);

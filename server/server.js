@@ -1,6 +1,5 @@
 var express = require('express');
 var session = require('express-session');
-// var knex = require('knex');
 var path = require('path');
 var bodyParser = require('body-parser');
 
