@@ -23,7 +23,8 @@ class CreateTrip extends React.Component {
       estCost: "",
       votes: 0,
       isInviteFriendModalOpen: false,
-      showReqFields: false
+      showReqFields: false,
+      showCalendar: false
     };
 
     this.onActivityClick = this.onActivityClick.bind(this);
@@ -76,14 +77,13 @@ class CreateTrip extends React.Component {
       })
       .catch((error) => {
         console.log('Error posting trip to DB', error)
-      })
+        })
   }
 
   dateCalendar(){
-    alert('hi');
-    $(document).ready(function(){
-    $( "#datepicker" ).datepicker();
-});
+    this.setState({
+      showCalendar: true
+    })
   }
 
   render() {
@@ -103,11 +103,11 @@ class CreateTrip extends React.Component {
               <label>Destination</label>
               <input name="tripName" type="text" onChange={e => this.setState({destination: e.target.value})} />
 
-              <label>Date Range Options</label> 
-              <p>Date: <input type="text" id="datepicker" onClick={this.dateCalendar}></input></p>
+              <label>Date Range Options</label> <br/>
+              <p>Date: <input type="text" id="datepicker" onClick={this.dateCalendar}></input></p><br/>
 
-              <Calendar />
-              
+              {this.state.showCalendar ? ( <div id="calendar"> <Calendar /></div> ) : null}
+                         
               {this.state.dates.map((date,index) => {
                 return(<div key={index}><li className="dateItem">{date}</li>
                       
