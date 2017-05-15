@@ -51,7 +51,7 @@ class CreateTrip extends React.Component {
     e.preventDefault();
     var arr = this.state.activities;
     var activityObject = {
-       activity: this.state.activityName,
+       activityName: this.state.activityName,
        activityDescription: this.state.activityDescription,
        activityCost: this.state.activityCost
     };
@@ -125,7 +125,7 @@ class CreateTrip extends React.Component {
               {this.state.activities.map ((activity,index) =>
                 (<div key={index} id='activityList'>
                   <div className="activityGroup">
-                    <li><span>Activity:</span> {activity.activity} </li>
+                    <li><span>Activity:</span> {activity.activityName} </li>
                     <li><span>Description:</span> {activity.activityDescription} </li>
                     <li><span>Cost:</span> ${activity.activityCost} </li>
                   </div>
@@ -145,7 +145,7 @@ class CreateTrip extends React.Component {
           </div>
         </div>
 
-        <InviteFriends show = {this.state.isInviteFriendModalOpen} onClose = {this.toggleModal} onAddTripClick = {this.onAddTripClick} onClose={this.toggleModal}>
+        <InviteFriends show = {this.state.isInviteFriendModalOpen} onClose = {this.toggleModal} onAddTripClick = {this.onAddTripClick} onClose={this.toggleModal} updateCurrentTrip = {this.props.updateCurrentTrip} >
           <h3>Invite friends to your trip</h3>
         </InviteFriends>
 
