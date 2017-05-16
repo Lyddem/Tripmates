@@ -12,8 +12,8 @@ class CreateTrip extends React.Component {
     super(props);
 
     this.state = {
-      // dates: [], 
-      // date: "",
+      dates: [], 
+      date: "",
       activities: [],
       activityName: "",
       activityDescription: "",
@@ -31,6 +31,7 @@ class CreateTrip extends React.Component {
     // this.onDateSubmission = this.onDateSubmission.bind(this);
     this.onAddTripClick = this.onAddTripClick.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.dateSubmit = this.dateSubmit.bind(this);
   }
 
   toggleModal(e) {
@@ -58,17 +59,29 @@ class CreateTrip extends React.Component {
     this.setState({activities: arr})
   }
 
-  // onDateSubmission (e) {
-  //   e.preventDefault();
-  //   var arr = this.state.dates;
-  //   arr.push(this.state.date);
-  //   this.setState({dates: arr});
-  // }
+  dateSubmit (e) {
+    e.preventDefault();
+    var arr = this.state.dates;
+    arr.push(this.state.date);
+    this.setState({dates: arr});
+
+
+    this.setState({date: moment(this.state.from).format('ll') + ' - ' + moment(this.state.to).format('LL')})
+    console.log('date after first date is pushed into dates array', this.state.date);
+    
+    //push date into this.state.dates
+    // var arr = this.state.dates;
+    // arr.push(this.state.date);
+    // this.setState({dates: arr});
+    this.state.dates.push(this.state.date);
+  }
+
+
 
   onAddTripClick (e, friend) {
     e.preventDefault();
 
-    axios.post('/tripInfo', {loggedInUser: this.props.loggedInUser, dates: this.state.dates, activities: this.state.activities, destination: this.state.destination, tripName: this.state.tripName, estCost: this.state.estCost, friend: friend, votes: this.state.votes})
+    axios.post('/tripInfo', {loggedInUser: this.props.loggedInUser, activities: this.state.activities, destination: this.state.destination, tripName: this.state.tripName, estCost: this.state.estCost, friend: friend, votes: this.state.votes})
       .then((response) => {
         console.log('Successfully posted trip to DB')
         this.props.history.push('/profile')
@@ -100,8 +113,6 @@ class CreateTrip extends React.Component {
               <label>Date Range Options</label> 
               
               <Calendar />
-                         
-             
 
             </div>
 

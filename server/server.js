@@ -38,8 +38,6 @@ app.get('/yelp', function (req, res) {
   });
 })
 
-
-
 app.get('/profile', function (req, res) {
   var userData = {};
   var tripArray = [];

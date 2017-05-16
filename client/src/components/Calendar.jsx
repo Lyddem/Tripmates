@@ -1,4 +1,4 @@
-// import React from 'react';
+  // import React from 'react';
 // import DayPicker from 'react-day-picker';
 // import ReactDOM from 'react-dom';
 
@@ -10,6 +10,8 @@
 
 import React from 'react';
 import moment from 'moment';
+import axios from 'axios';
+
 import DayPicker, { DateUtils } from 'react-day-picker';
 
 // import 'react-day-picker/lib/style.css';
@@ -50,20 +52,33 @@ import DayPicker, { DateUtils } from 'react-day-picker';
  //    arr.push(this.state.date);
  //    this.setState({dates: arr});
  //  }
+ 
 
   dateSubmit(e){
     e.preventDefault();
    
     //set this.date to selcted date range
-    this.setState({date: moment(this.state.from).format('LL') + ' - ' + moment(this.state.to).format('LL')})
-    console.log(this.state.date);
-
+    this.setState({date: moment(this.state.from).format('ll') + ' - ' + moment(this.state.to).format('LL')})
+    console.log('date after first date is pushed into dates array', this.state.date);
+    
     //push date into this.state.dates
-    var arr = this.state.dates;
-    arr.push(this.state.date);
-    this.setState({dates: arr});
+    // var arr = this.state.dates;
+    // arr.push(this.state.date);
+    // this.setState({dates: arr});
+    this.state.dates.push(this.state.date);
 
-    console.log(this.state.dates);
+    console.log('dates', this.state.dates);
+    //post to db
+    axios.post('/submitDate', { dates: this.state.dates})
+      .then((response) => {
+        console.log('response from server', response);
+        console.log('Successfully posted dates array to DB')
+        this.props.history.push('/profile')
+      })
+      .catch((error) => {
+        console.log('Error posting trip to DB', error)
+        })
+
   }
 
   render() {
@@ -78,11 +93,12 @@ import DayPicker, { DateUtils } from 'react-day-picker';
             <a href="." onClick={this.handleResetClick}>Reset</a>
 
           </p>} 
-           {this.state.dates.map((date,index) => {
-                return(<div key={index}><li className="dateItem">{date}</li>
-                      
-                      </div>)
-              })}
+           {
+            // var datesArr = this.state.dates.slice(1,this.state.dates.length); 
+            this.state.dates.map((date,index) => {
+                return(<div key={index}><li className="dateItem">{date}</li> </div>)
+              })
+          }
            
         <DayPicker
           numberOfMonths={2}
